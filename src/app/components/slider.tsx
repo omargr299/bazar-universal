@@ -1,14 +1,18 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 
 export function Slider({ images, title }: { images: string[], title: string }) {
     if (!images) return null
 
-    const [mainImg, setMainImg] = useState("")
+    const [mainImg, setMainImg] = useState(images[0])
 
-    if (images.length > 0 && !mainImg) setMainImg(images[0])
+    // useEffect(() => {
+    //     if (images.length === 0) return
+
+    //     changeMainImg(images[0])
+    // }, [])
 
     const changeMainImg = (image: string) => {
         setMainImg(image)
@@ -19,8 +23,10 @@ export function Slider({ images, title }: { images: string[], title: string }) {
         <section className="flex flex-col justify-center items-center gap-3">
             <figure className="col-span-2">
                 <Image src={mainImg || ""} width={300} height={300} alt={title} className="aspect-square" />
+
             </figure>
-            <div className="flex gap-2" >
+
+            <aside className="flex gap-2" >
                 {
                     images.map((image) => {
                         return (
@@ -37,7 +43,8 @@ export function Slider({ images, title }: { images: string[], title: string }) {
                     }
                     )
                 }
-            </div>
+            </aside>
+
         </section>
     )
 }

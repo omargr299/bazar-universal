@@ -4,14 +4,15 @@ import { Slider } from "@/app/components/slider"
 
 
 export default async function Item({ params: { id } }: { params: { id: string } }) {
-    console.log(id)
-    const res = await fetch(`http://${process.env.HOST_API}/api/items/${id}`, { method: 'GET', headers: { 'Content-Type': 'application/json' } })
+
+    const res = await fetch(`http://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+
     const product = (await res.json())
 
     return (
         <>
             {
-                product ?
+                product?.id ?
                     <main className="[&>*]:my-3">
 
                         <Slider images={product.images} title={product.title} />
@@ -29,7 +30,7 @@ export default async function Item({ params: { id } }: { params: { id: string } 
                         </aside>
                         <button className="px-5 py-2">Buy</button>
                     </main>
-                    : <h1>Product not found</h1>
+                    : <h1 className='text-2xl font-bold'>Product not found</h1>
             }
         </>
     )
