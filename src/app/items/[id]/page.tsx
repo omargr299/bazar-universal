@@ -5,7 +5,7 @@ import { Slider } from "@/app/components/slider"
 
 export default async function Item({ params: { id } }: { params: { id: string } }) {
 
-    const res = await fetch(`http://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    const res = await fetch(`https://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product = (await res.json())
 
