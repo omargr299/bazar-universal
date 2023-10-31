@@ -10,7 +10,7 @@ export function ProductItem({ product }: { product: Product }) {
 
 
     return (
-        <li onClick={onClick} className='cursor-pointer border-y-2 p-4 md:border-x-2  box-content'>
+        <li key={product.id} onClick={onClick} className='cursor-pointer border-y-2 p-4 md:border-x-2  box-content'>
             <article className='h-full grid grid-cols-2 md:grid-cols-1  '>
                 <figcaption className='mx-3'>
                     <Image

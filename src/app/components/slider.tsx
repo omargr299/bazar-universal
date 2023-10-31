@@ -6,7 +6,9 @@ import Image from "next/image"
 export function Slider({ images, title }: { images: string[], title: string }) {
     if (!images) return null
 
-    const [mainImg, setMainImg] = useState(images[0] || "")
+    const [mainImg, setMainImg] = useState("")
+
+    if (images.length > 0 && !mainImg) setMainImg(images[0])
 
     const changeMainImg = (image: string) => {
         setMainImg(image)

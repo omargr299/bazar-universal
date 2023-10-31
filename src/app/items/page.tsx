@@ -19,7 +19,7 @@ export default async function Items({ searchParams }: Props) {
                 search
                     ?
                     <section>
-                        <h2>Results of '{search}'</h2>
+                        <h2>Results of &apos{search}&apos</h2>
                         <ListProducts products={products} />
                     </section>
                     :
