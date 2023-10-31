@@ -21,9 +21,9 @@ export function ProductItem({ product }: { product: Product }) {
                         className='m-auto rounded-full aspect-square '
                     />
                 </figcaption>
-                <main className='w-full flex flex-col justify-around'>
+                <main className='w-full flex flex-col justify-around gap-2'>
                     <h3><strong>{product.title}</strong></h3>
-                    <p className='overflow-hidden h-50 break-words'>{product.description}</p>
+                    <p className='overflow-hidden  whitespace-nowrap  overflow-ellipsis'>{product.description}</p>
                     <aside className='flex flex-col gap-1 my-1'>
                         <span><i>Price:</i> ${product.price}</span>
                         <span><i>Category:</i> {product.category}</span>
