@@ -13,8 +13,6 @@ export default async function Items({ searchParams }: Props) {
     const res = await fetch(`https://${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
 
-
-
     return (
         <main>
             {
