@@ -9,11 +9,12 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
     const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
     const product: Product = await res.json()
 
+    const baseurl = process.env.HOST_API
 
     return {
         title: `Bazar Universal | ${product?.title || "Product"}`,
         description: `Product page for ${product?.title}`,
-        metadataBase: new URL(`${process.env.HOST}/items/${id}`),
+        metadataBase: new URL(`${baseurl}/items/${id}`),
         openGraph: {
             url: `${process.env.HOST}/items/${id}`,
             type: "website",
