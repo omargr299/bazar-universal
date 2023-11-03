@@ -12,5 +12,5 @@ Is a *e-commerce web-site* that has 3 pages:
 
 Additionally, the page has an API that provides us the products information
 
-*link to page*: https://bazar-universal-sjky-5b1gcf0gc-omargr299s-projects.vercel.app/
+*link to page*: https://bazar-universal-hqvtgyej9-omargr299s-projects.vercel.app/
 
