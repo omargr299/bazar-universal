@@ -3,9 +3,9 @@ import './styles.css'
 import { Slider } from "@/app/components/slider"
 
 import { Product } from '@/types/products'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 
-export async function generateMetadata(parent: ResolvingMetadata, { params: { id }, }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { id }, }: { params: { id: string } }): Promise<Metadata> {
     const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
     const product: Product = await res.json()
 
