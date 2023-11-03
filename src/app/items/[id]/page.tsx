@@ -15,7 +15,7 @@ export async function generateMetadata(parent: ResolvingMetadata, { params: { id
         description: `Product page for ${product?.title}`,
 
         openGraph: {
-            url: `${process.env.HOST_API}/items/${id}`,
+
             type: "website",
             title: `Bazar Universal | ${product?.title}`,
             description: `Product ${product?.title}`,
