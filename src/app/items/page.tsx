@@ -18,9 +18,9 @@ export default async function ItemsPage({ searchParams }: Props) {
     const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
 
-    metadata.title = `Bazar Universal | ${search}`
-    metadata.metadataBase = new URL(`${process.env.HOST_API}/items?q=${search}`)
-    metadata.description = `Product page for ${search}`
+    metadata.title = `Bazar Universal | ${search || "Search"}`
+    metadata.metadataBase = new URL(`${process.env.HOST_API}/items?q=${search || ""}`)
+    metadata.description = `Product page for ${search || "Search"}`
 
     return (
         <main>
