@@ -19,7 +19,7 @@ export async function generateMetadata(
 
         openGraph: {
             type: 'website',
-            url: `${process.env.HOST}/items/${id}`,
+            url: `${process.env.HOST_API}/items/${id}`,
             title: "Bazar Universal | " + product?.title || 'Product not found',
             description: product?.description || '',
             images: product?.images.map(image => ({
