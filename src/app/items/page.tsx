@@ -8,6 +8,17 @@ type Props = {
 }
 
 
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+
+    const search = searchParams?.["search"]
+    const baseurl = process.env.HOST_API
+
+    return {
+        title: `Bazar Universal | ${search || "Search"}`,
+        description: `Product page for ${search || "Search"}`,
+        metadataBase: new URL(`${baseurl}/items?q=${searchParams?.["search"]}`),
+    }
+}
 
 export default async function ItemsPage({ searchParams }: Props) {
     const search = searchParams?.["search"]
