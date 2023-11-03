@@ -13,9 +13,9 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
     return {
         title: `Bazar Universal | ${product?.title || "Product"}`,
         description: `Product page for ${product?.title}`,
-
+        metadataBase: new URL(`${process.env.HOST}/items/${id}`),
         openGraph: {
-
+            url: `${process.env.HOST}/items/${id}`,
             type: "website",
             title: `Bazar Universal | ${product?.title}`,
             description: `Product ${product?.title}`,
@@ -24,6 +24,7 @@ export async function generateMetadata({ params: { id } }: { params: { id: strin
             ],
         },
         twitter: {
+
             card: "summary_large_image",
             title: `Bazar Universal | ${product?.title}`,
             description: `Product ${product?.title}`,
