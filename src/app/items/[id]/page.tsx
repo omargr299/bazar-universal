@@ -16,7 +16,6 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
 
     const product: Product | undefined = (await res.json())
 
-    metadata.metadataBase = new URL(`${process.env.HOST_API}/items/${id}`)
     metadata.title = `Bazar Universal | ${product?.title}`
     metadata.description = `Product for ${product?.title}`
     metadata.openGraph = {
