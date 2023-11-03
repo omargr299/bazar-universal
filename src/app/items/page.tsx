@@ -9,7 +9,6 @@ type Props = {
 
 export const metadata: Metadata = {
     title: "Bazar Universal | Product",
-    metadataBase: new URL(`${process.env.HOST_API}`),
     description: `Product`,
 }
 
