@@ -14,41 +14,36 @@ export async function generateMetadata(
 
     const product: Product | undefined = (await res.json())
 
-    return {
-        title: "Bazar Universal | " + product?.title || 'Product not found',
+    const previousimages = (await parent).openGraph?.images || []
 
+    return {
+        title: "Bazar Universal | " + (product?.title || 'Product not found'),
+        metadataBase: new URL(`${process.env.HOST_API}/items/${id}`),
+        description: `product page for ${product?.title}`,
         openGraph: {
             type: 'website',
             url: `${process.env.HOST_API}/items/${id}`,
             title: "Bazar Universal | " + product?.title || 'Product not found',
             description: product?.description || '',
-            images: product?.images.map(image => ({
-                url: image,
-                width: 800,
-                height: 600,
-                alt: product?.title || 'Product not found'
-            }))
+            images: [...previousimages, ...product?.images?.map(image => image) || []]
         },
         twitter: {
 
             card: 'summary_large_image',
             title: "Bazar Universal | " + product?.title || 'Product not found',
             description: product?.description || '',
-            images: product?.images.map(image => ({
-                url: image,
-                width: 800,
-                height: 600,
-                alt: product?.title || 'Product not found'
-            }))
+            images: [...previousimages, ...product?.images?.map(image => image) || []]
         },
     }
 }
 
-export default async function Item({ params: { id } }: { params: { id: string } }) {
+export default async function ItemPage({ params: { id } }: { params: { id: string } }) {
 
     const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product: Product | undefined = (await res.json())
+
+
 
     return (
         <>
