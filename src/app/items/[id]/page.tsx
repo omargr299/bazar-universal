@@ -5,7 +5,7 @@ import { Slider } from "@/app/components/slider"
 import { Product } from '@/types/products'
 import type { Metadata } from 'next'
 
-export async function generateMetadata({ params: { id }, }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { id } }: { params: { id: string } }): Promise<Metadata> {
     const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
     const product: Product = await res.json()
 
@@ -20,12 +20,7 @@ export async function generateMetadata({ params: { id }, }: { params: { id: stri
             title: `Bazar Universal | ${product?.title}`,
             description: `Product ${product?.title}`,
             images: [
-                {
-                    url: product?.images[0] || "",
-                    width: 800,
-                    height: 600,
-                    alt: product?.title || "",
-                },
+                product?.images[0] || "",
             ],
         },
         twitter: {
@@ -33,12 +28,7 @@ export async function generateMetadata({ params: { id }, }: { params: { id: stri
             title: `Bazar Universal | ${product?.title}`,
             description: `Product ${product?.title}`,
             images: [
-                {
-                    url: product?.images[0] || "",
-                    width: 800,
-                    height: 600,
-                    alt: product?.title || "",
-                }
+                product?.images[0] || "",
             ],
 
         }
