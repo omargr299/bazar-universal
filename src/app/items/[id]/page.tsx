@@ -1,40 +1,44 @@
 import './styles.css'
 
 import { Slider } from "@/app/components/slider"
+
 import { Product } from '@/types'
 import type { Metadata, ResolvingMetadata } from 'next'
 
 
-export async function generateMetadata(
-    { params: { id } }: { params: { id: string } },
-    parent: ResolvingMetadata
-): Promise<Metadata> {
+export const metadata: Metadata = {
+    title: "Bazar Universal | Product",
+    metadataBase: new URL(`${process.env.HOST_API}/items`),
+    description: `Product`,
+    openGraph: {
+        url: "",
+        type: "website",
+        title: "",
+        description: "",
+        images: [
+            {
+                url: "",
+                width: 800,
+                height: 600,
+                alt: "",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "",
+        description: "",
+        images: [
+            {
+                url: "",
+                width: 800,
+                height: 600,
+                alt: "",
+            }
+        ],
 
-    const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    },
 
-    const product: Product | undefined = (await res.json())
-
-    const previousimages = (await parent).openGraph?.images || []
-
-    return {
-        title: "Bazar Universal | " + (product?.title || 'Product not found'),
-        metadataBase: new URL(`${process.env.HOST_API}/items/${id}`),
-        description: `product page for ${product?.title}`,
-        openGraph: {
-            type: 'website',
-            url: `${process.env.HOST_API}/items/${id}`,
-            title: "Bazar Universal | " + product?.title || 'Product not found',
-            description: product?.description || '',
-            images: [...previousimages, ...product?.images?.map(image => image) || []]
-        },
-        twitter: {
-
-            card: 'summary_large_image',
-            title: "Bazar Universal | " + product?.title || 'Product not found',
-            description: product?.description || '',
-            images: [...previousimages, ...product?.images?.map(image => image) || []]
-        },
-    }
 }
 
 export default async function ItemPage({ params: { id } }: { params: { id: string } }) {
@@ -43,6 +47,37 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
 
     const product: Product | undefined = (await res.json())
 
+    metadata.title = `Bazar Universal | ${product?.title}`
+    metadata.metadataBase = new URL(`${process.env.HOST_API}/items/${id}`)
+    metadata.description = `Product ${product?.title}`
+    metadata.openGraph = {
+        url: `${process.env.HOST_API}/items/${id}`,
+        type: "website",
+        title: `Bazar Universal | ${product?.title}`,
+        description: `Product ${product?.title}`,
+        images: [
+            {
+                url: product?.images[0] || "",
+                width: 800,
+                height: 600,
+                alt: product?.title,
+            },
+        ],
+    }
+    metadata.twitter = {
+        card: "summary_large_image",
+        title: `Bazar Universal | ${product?.title}`,
+        description: `Product ${product?.title}`,
+        images: [
+            {
+                url: product?.images[0] || "",
+                width: 800,
+                height: 600,
+                alt: product?.title,
+            }
+        ],
+
+    }
 
 
     return (

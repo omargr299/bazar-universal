@@ -8,6 +8,7 @@ type Props = {
 }
 
 import type { Metadata, ResolvingMetadata } from 'next'
+import { title } from "process"
 
 
 export async function generateMetadata(
@@ -16,8 +17,6 @@ export async function generateMetadata(
 ): Promise<Metadata> {
 
     const search = searchParams?.["search"]
-
-
 
     return {
         title: "Bazar Universal | " + (search || 'Search'),
