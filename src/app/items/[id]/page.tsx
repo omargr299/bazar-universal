@@ -10,15 +10,16 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
 
-    const res = await fetch(`http://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    const res = await fetch(`https://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product: Product | undefined = (await res.json())
 
     return {
         title: "Bazar Universal | " + product?.title || 'Product not found',
+
         openGraph: {
             type: 'website',
-            url: `http://${process.env.HOST}/items/${id}`,
+            url: `https://${process.env.HOST}/items/${id}`,
             title: "Bazar Universal | " + product?.title || 'Product not found',
             description: product?.description || '',
             images: product?.images.map(image => ({
