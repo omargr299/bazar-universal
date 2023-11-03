@@ -9,7 +9,7 @@ type Props = {
 
 export const metadata: Metadata = {
     title: "Bazar Universal | Product",
-    metadataBase: new URL(`${process.env.HOST_API}/items`),
+    metadataBase: new URL(`${process.env.HOST_API}`),
     description: `Product`,
 }
 
@@ -18,7 +18,7 @@ export default async function ItemsPage({ searchParams }: Props) {
     const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
 
-    metadata.metadataBase = new URL(`${process.env.HOST_API}/items?q=${search}`)
+
     metadata.title = `Bazar Universal | ${search || "Search"}`
     metadata.description = `Product page for ${search}`
 
