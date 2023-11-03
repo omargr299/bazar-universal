@@ -3,11 +3,46 @@ import './styles.css'
 import { Slider } from "@/app/components/slider"
 
 import { Product } from '@/types/products'
-import type { Metadata } from 'next'
+import type { Metadata, ResolvingMetadata } from 'next'
 
-export const metadata: Metadata = {
-    title: "Bazar Universal | Product",
-    description: `Product`,
+export async function getStaticPaths(parent: ResolvingMetadata, { params: { id }, }: { params: { id: string } }): Promise<Metadata> {
+    const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    const product: Product = await res.json()
+
+
+    return {
+        title: `Bazar Universal | ${product?.title || "Product"}`,
+        description: `Product page for ${product?.title}`,
+
+        openGraph: {
+            url: `${process.env.HOST_API}/items/${id}`,
+            type: "website",
+            title: `Bazar Universal | ${product?.title}`,
+            description: `Product ${product?.title}`,
+            images: [
+                {
+                    url: product?.images[0] || "",
+                    width: 800,
+                    height: 600,
+                    alt: product?.title || "",
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `Bazar Universal | ${product?.title}`,
+            description: `Product ${product?.title}`,
+            images: [
+                {
+                    url: product?.images[0] || "",
+                    width: 800,
+                    height: 600,
+                    alt: product?.title || "",
+                }
+            ],
+
+        }
+    }
 }
 
 export default async function ItemPage({ params: { id } }: { params: { id: string } }) {
@@ -15,37 +50,6 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
     const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product: Product | undefined = (await res.json())
-
-    metadata.title = `Bazar Universal | ${product?.title}`
-    metadata.description = `Product for ${product?.title}`
-    metadata.openGraph = {
-        url: `${process.env.HOST_API}/items/${id}`,
-        type: "website",
-        title: `Bazar Universal | ${product?.title}`,
-        description: `Product ${product?.title}`,
-        images: [
-            {
-                url: product?.images[0] || "",
-                width: 800,
-                height: 600,
-                alt: product?.title || "",
-            },
-        ],
-    }
-    metadata.twitter = {
-        card: "summary_large_image",
-        title: `Bazar Universal | ${product?.title}`,
-        description: `Product ${product?.title}`,
-        images: [
-            {
-                url: product?.images[0] || "",
-                width: 800,
-                height: 600,
-                alt: product?.title || "",
-            }
-        ],
-
-    }
 
 
     return (
