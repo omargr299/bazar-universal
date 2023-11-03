@@ -7,18 +7,14 @@ type Props = {
     searchParams: { [key: string]: string | undefined },
 }
 
-export const metadata: Metadata = {
-    title: "Bazar Universal | Product",
-    description: `Product`,
-}
+
 
 export default async function ItemsPage({ searchParams }: Props) {
     const search = searchParams?.["search"]
     const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
 
-    metadata.title = `Bazar Universal | ${search || "Search"}`
-    metadata.description = `Product page for ${search}`
+
 
     return (
         <main>
