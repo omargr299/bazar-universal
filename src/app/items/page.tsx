@@ -20,7 +20,7 @@ export default async function ItemsPage({ searchParams }: Props) {
 
     metadata.title = `Bazar Universal | ${search}`
     metadata.metadataBase = new URL(`${process.env.HOST_API}/items?q=${search}`)
-    metadata.description = `Product apge for ${search}`
+    metadata.description = `Product page for ${search}`
 
     return (
         <main>

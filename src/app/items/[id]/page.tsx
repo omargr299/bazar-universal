@@ -19,7 +19,7 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
 
     metadata.title = `Bazar Universal | ${product?.title}`
     metadata.metadataBase = new URL(`${process.env.HOST_API}/items/${id}`)
-    metadata.description = `Product ${product?.title}`
+    metadata.description = `Product for ${product?.title}`
     metadata.openGraph = {
         url: `${process.env.HOST_API}/items/${id}`,
         type: "website",
