@@ -1,34 +1,26 @@
 import { ListProducts } from "@/app/components/listProducts"
 
-
+import type { Metadata } from 'next'
 
 // app/posts/page.ts
 type Props = {
     searchParams: { [key: string]: string | undefined },
 }
 
-import type { Metadata, ResolvingMetadata } from 'next'
-import { title } from "process"
-
-
-export async function generateMetadata(
-    { searchParams }: { searchParams: { [key: string]: string | undefined } },
-    parent: ResolvingMetadata
-): Promise<Metadata> {
-
-    const search = searchParams?.["search"]
-
-    return {
-        title: "Bazar Universal | " + (search || 'Search'),
-        metadataBase: new URL(`${process.env.HOST_API}/items?q=${search}`),
-        description: `Search products for ${search}`,
-    }
+export const metadata: Metadata = {
+    title: "Bazar Universal | Product",
+    metadataBase: new URL(`${process.env.HOST_API}/items`),
+    description: `Product`,
 }
 
 export default async function ItemsPage({ searchParams }: Props) {
     const search = searchParams?.["search"]
     const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
+
+    metadata.title = `Bazar Universal | ${search}`
+    metadata.metadataBase = new URL(`${process.env.HOST_API}/items?q=${search}`)
+    metadata.description = `Product apge for ${search}`
 
     return (
         <main>

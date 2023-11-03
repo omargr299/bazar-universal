@@ -2,43 +2,13 @@ import './styles.css'
 
 import { Slider } from "@/app/components/slider"
 
-import { Product } from '@/types'
-import type { Metadata, ResolvingMetadata } from 'next'
-
+import { Product } from '@/types/products'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: "Bazar Universal | Product",
     metadataBase: new URL(`${process.env.HOST_API}/items`),
     description: `Product`,
-    openGraph: {
-        url: "",
-        type: "website",
-        title: "",
-        description: "",
-        images: [
-            {
-                url: "",
-                width: 800,
-                height: 600,
-                alt: "",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "",
-        description: "",
-        images: [
-            {
-                url: "",
-                width: 800,
-                height: 600,
-                alt: "",
-            }
-        ],
-
-    },
-
 }
 
 export default async function ItemPage({ params: { id } }: { params: { id: string } }) {
@@ -60,7 +30,7 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
                 url: product?.images[0] || "",
                 width: 800,
                 height: 600,
-                alt: product?.title,
+                alt: product?.title || "",
             },
         ],
     }
@@ -73,7 +43,7 @@ export default async function ItemPage({ params: { id } }: { params: { id: strin
                 url: product?.images[0] || "",
                 width: 800,
                 height: 600,
-                alt: product?.title,
+                alt: product?.title || "",
             }
         ],
 
