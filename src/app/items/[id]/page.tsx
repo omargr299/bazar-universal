@@ -10,7 +10,7 @@ export async function generateMetadata(
     parent: ResolvingMetadata
 ): Promise<Metadata> {
 
-    const res = await fetch(`https://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product: Product | undefined = (await res.json())
 
@@ -19,7 +19,7 @@ export async function generateMetadata(
 
         openGraph: {
             type: 'website',
-            url: `https://${process.env.HOST}/items/${id}`,
+            url: `${process.env.HOST}/items/${id}`,
             title: "Bazar Universal | " + product?.title || 'Product not found',
             description: product?.description || '',
             images: product?.images.map(image => ({
@@ -46,7 +46,7 @@ export async function generateMetadata(
 
 export default async function Item({ params: { id } }: { params: { id: string } }) {
 
-    const res = await fetch(`http://${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
+    const res = await fetch(`${process.env.HOST_API}/api/items/${id}`, { method: 'GET' })
 
     const product: Product | undefined = (await res.json())
 

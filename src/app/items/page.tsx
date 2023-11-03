@@ -10,7 +10,7 @@ type Props = {
 
 export default async function Items({ searchParams }: Props) {
     const search = searchParams?.["search"]
-    const res = await fetch(`https://${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
+    const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
 
     return (
