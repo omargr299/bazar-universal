@@ -4,11 +4,11 @@ import productsList from '@/data/products.json'
 export async function getProducts(category: string) {
     const regex = new RegExp(category, 'g')
 
-    productsList["products"]
-        .forEach(product => console.log(product.category))
-
     const filteredProducts = productsList["products"]
-        .filter(product => regex.test(product.category))
+        .filter(product => {
+
+            return product.category.match(regex)
+        })
 
     return filteredProducts
 }

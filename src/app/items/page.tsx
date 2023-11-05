@@ -22,9 +22,10 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 
 export default async function ItemsPage({ searchParams }: Props) {
     const search = searchParams?.["search"]
+    console.log("PAGE", search?.length)
     const res = await fetch(`${process.env.HOST_API}/api/items?q=${search}`, { method: 'GET' })
     const products = await res.json()
-
+    console.log(products.length)
 
 
     return (
