@@ -1,9 +1,14 @@
 'use client'
 
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useRouter } from "next/router"
+import { useState,useEffect } from "react"
+
 
 export function SearchForm({ main = true }: { main?: Boolean }) {
+    const [categories, setCategories] = useState([]) 
+    
+
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const form = e.currentTarget
@@ -12,6 +17,16 @@ export function SearchForm({ main = true }: { main?: Boolean }) {
         window.location.href = `/items?search=${search}`
     }
 
+    useEffect(() => {
+        const getCategories = async () => {
+            const url = window.location.origin + '/api/categories'
+            const res = await fetch(url, { method: 'GET' })
+            const categories = await res.json()
+            setCategories(categories)
+        }
+
+        getCategories()
+    }, [])
 
     const searchParams = useSearchParams()
     const [search, setSearch] = useState(searchParams.get("search") || "")
@@ -20,10 +35,16 @@ export function SearchForm({ main = true }: { main?: Boolean }) {
         <>
 
             <form onSubmit={onSubmit} className="w-full flex flex-col gap-3 items-center ">
+                <datalist id="searches">
+                    {categories.map((category,index: any) => (
+                        <option key={index}>{category} </option>
+                    ))}
+                </datalist>
                 <input
                     type="text"
                     name="search"
                     id="search"
+                    list="searches"
                     required
                     placeholder="Laptops, smartphones, etc"
                     className="w-full max-w-[600px] min-w-[200px]"

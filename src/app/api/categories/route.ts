@@ -5,5 +5,5 @@ export async function GET(request: Request) {
     const categories = await getCategories()
     const setCategories = new Set(categories)
 
-    return Response.json({ categories: Array.from(setCategories) })
+    return Response.json(Array.from(setCategories))
 }
